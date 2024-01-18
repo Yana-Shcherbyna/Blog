@@ -1,31 +1,15 @@
 <?php
-// echo 'Hello word from PHP';
-// // echo time();
-// function add($param1, $param2) {
-//   return $param1 + $param2;
-// }
-// $a = $_GET['a'];
-// $b = $_GET['b'];
 
-// echo add($a, $b);
-
-// echo '<br>';
-
-// for ($i = 0; $i < 10; $i++) {
-//   echo $i . '<br>';
-// }
-
-// підключаємо файл який взаємодіє з базою даних
+// add connecting with DataBase
 require_once('database.php');
-// файл який працює зі статтями
+// add articles file 
 require_once('models/articles.php');
 
-// з"єднаємось з базою даних
 $link = db_connect();
-// робимо запрос до бази даних, про повернення всіх статтей для перегляду (вводимо параметр дискриптор $link)
+// we make a request to the database to return all articles for review (enter the $link descriptor parameter)
 $articles = articles_all($link);
 
-// підключаємо використовуємий шаблон
+// connect the used template
 include('views/articles.php');
 
 ?>
