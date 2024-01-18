@@ -1,81 +1,76 @@
 <?php 
-// підключаємо базу даних 
+// connect the database 
 require_once('../database.php');
-// підключаємо файл який відповідає за роботу зі статтями
+// we connect the file responsible for working with articles
 require_once('../models/articles.php');
 
-// встановлюємо з"єднання з базою даних
+// establish a connection with the database
 $link = db_connect();
 
-// якщо є вхідний параметр $_GET['action]
+
+// check the input parameter $_GET['action']
 if (isset($_GET['action']))
-// тоді змінна $action = масиву з ключем ['action'] 
   $action = $_GET['action'];
 else
-// тоді змінна $action = пуста
   $action = "";
 
-// якщо $action = додати
+
+// add post
 if ($action == "add") {
 
-
-  // додати нову статтю, пост !!!!!!!потрібне пояснення!!!!!
   if (!empty($_POST)) {
     articles_new($link, $_POST['title'], $_POST['date'], $_POST['content']);
-    // перенаправлення користувача на index.php
+    // redirecting the user to index.php
       header("Location: index.php");
   }
-
-// порібно завантажити шаблон який дозволяє додати нову статтю
+  
+// download a template that allows you to add a new article
 include("../views/article_newadmin.php");
 } 
-// якщо вхідний параметр == edit
+
+  
+// edit a post
 else if ($action == "edit") {
 
-  // перевіряємо, якщо не встановлений параметр ID
+  // check if the ID parameter is not set
   if (!isset($_GET['id']))
-  // то перенапрвляємо користувача на головну сторінку адмінки
+  // then redirects the user to the main admin page
   header("Location: index.php");
-  // якщо параметр ID заданий($_GET['id']), то його конвертуємо в INT(число). Якщо даний параметр виявився строкою, то таке перетворення видасть "0"
+ 
   $id = (int)$_GET['id'];
 
-  // перевіряємо, якщо параметер POST не пустий і $id більше "0"
+  // audit
   if (!empty($_POST) && $id > 0) {
-    // тоді потрібно зберегти дану статтю (пост)
-    // $link - з"єднання з базою даних
-    // $id - передаємо ID
-    // $_POST[...] - передаємо нові дані
+
     articles_edit($link, $id, $_POST['title'], $_POST['date'], $_POST['content']);
-    // після того як, дані будуть збережені в базі даних, робимо переадресацію на нову сторінку
+   // we redirect to a new page
     header("Location: index.php");
   }
-
-   
-    // якщо, $_POST дані порожні, потрібно відобразити таблицю зі змістом пустими полями доступними для редагування. Попередня секція буде ігноруватись
-    // отримуємо статтю з бази даних
+  // if $_POST data is empty, you need to display a table with empty editable fields. The previous section will be ignored
+    // we get the article from the database
     $article = articles_get($link, $id);
-    // і підключаємо сторінку яка відповідає за статтю
+    //connect the page corresponding to the article
     include("../views/article_admin.php");
 }
+  
 
-// для видалення статтей (постів)
+// to delete articles (posts)
 else if ($action == "delete") {
-  // тоді присвоюєм параметр GET['id']
+  // then assign the parameter GET['id']
   $id = $_GET['id'];
-  // визиваємо функцію в яку передаємо з"єднання з базою ($link) та $id яку ми хочемо видалити
+  // call the function to which we pass the connection to the base ($link) and the $id that we want to delete
   $articles = articles_delete($link, $id);
-  // редірект на головну
+  // redirect to the main page
   header("Location: index.php");
 
 }
 
-
-// якщо ніяких параметрів не передано, використовуємо шаблон для виводу всіх статтей блогу
+// if no parameters are passed, we use the template to display all blog articles
 else {  
-// робимо запит до бази даних, щодо статтей які доступні в блозі для читання (з єдиним параметром "дискриптор $link")
+//request to the DB regarding articles that are available on the blog for reading (with the only parameter "descriptor $link")
 $articles = articles_all($link);
 
-// підключимо файл в якому буде відображатись front адмінки
+// connect the file in which the front of the admin will be displayed
 include('../views/articles_admin.php');
 }
 
