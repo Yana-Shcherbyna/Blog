@@ -18,7 +18,7 @@
       <div class="article">
         <h3><a href="article.php?id=<?= $a['id']?>"><?= $a['title']?></a></h3>
         <em>Published: <?= $a['date']?></em>
-        <!-- звернемось до функії яка скорочує кількість символів для виводу тексту статті -->
+        <!-- let's turn to the function that reduces the number of characters for outputting the text of the article -->
         <p><?= articles_intro($a['content']);?></p>
       </div>
 
