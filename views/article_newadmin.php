@@ -13,10 +13,9 @@
   <div class="container">
     <h1>My first blog</h1>    
     <div>
-<!-- form for adding a post (record) -->
+  <!-- form for adding a post (record) -->
 
-<?php 
-    echo $_SERVER['PHP_SELF'];
+<?php //    echo $_SERVER['PHP_SELF'];
     ?>
     <form method="post" action="index.php?action=add">
 
