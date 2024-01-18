@@ -6,13 +6,12 @@ define('MYSQL_DB', 'blog');
 
 function db_connect() {
 
-  // під"єднуємось до бази даних (дискриптор з"єднання)
+  //connect to the database (connection handle)
   $link = mysqli_connect(MYSQL_SERVER, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB)
-
-  // якщо з"єднання не встановлено, видає помилку
+  // if the connection is not established, it gives an error
     or die('Error: ' . mysqli_error($link));
 
-// виставляємо кодування
+// set the coding
   if (!mysqli_set_charset($link, 'utf8mb4')) {
     printf('Error: ' . mysqli_error($link));
   }
