@@ -13,12 +13,8 @@
   <div class="container">
     <h1>My first blog</h1>    
     <div>
-<!-- форма для додавання поста (запису) -->
-<!-- method="post" яким способом будуть передаватись параметри (post будуть передаватись в http залоговку, а не в url рядку) -->
-<!-- action="index.php" говорить про те, що дані потрібно передавати скрипту index.php 
-(?action= $_GET['action'] зчитує параметер 'action' з url (add або edit) та відправляє інформацію по адресі (add або edit))
-(&id= $_GET['id'] щоб зрозуміти яку саме статтю потрібно редагувати-->
-
+      
+<!-- form for adding a post (record) -->
     <form method="post" action="index.php?action=edit&id=<?= $_GET['id']?>">
 
     <div class="mb-3">
