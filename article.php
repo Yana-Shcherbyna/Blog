@@ -3,9 +3,9 @@
 require_once('database.php');
 require_once('models/articles.php');
 
-// встановлюємо з"єднання з базою даних
+// establish a connection with the database
 $link = db_connect();
-// передаємо дискриптор з"єднання
+// pass the connection descriptor
 $article = articles_get($link, $_GET['id']);
 
 include('views/article.php');
