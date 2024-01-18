@@ -26,7 +26,7 @@
 
     </div>
     <footer>
-      <p>My first blog <br> Copyright &copy; 2023</p>
+      <p>My first blog <br> Copyright &copy; <?php echo date("Y"); ?></p>
     </footer>
   </div>
 </body>
