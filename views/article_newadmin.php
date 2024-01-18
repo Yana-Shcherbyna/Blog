@@ -15,6 +15,7 @@
     <div>
       
   <!-- form for adding a post (record) -->
+   <?php echo $_SERVER['PHP_SELF']; ?>
     <form method="post" action="index.php?action=add">
 
     <div class="mb-3">
